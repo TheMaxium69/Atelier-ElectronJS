@@ -1,6 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-
+const fs = require('fs');
 
 let mainWindow;
 function createWindow () {
@@ -37,3 +37,51 @@ app.whenReady().then(() => {
 
     console.log('App is ready');
 })
+
+
+/*
+*
+* IPC
+*
+* */
+
+ipcMain.on('hello', (event) => {
+
+    console.log('hello i m back end');
+
+})
+
+
+let myPass = 'JeSuisUnPass';
+
+ipcMain.on('getMyVariable', (event, pseudo) => {
+
+    console.log('Demande pris en compte de : ' + pseudo);
+
+    /* RENVOYER AU FRONT -> variable myPass */
+
+    event.sender.send('havePass', myPass);
+
+
+    /* L'ECRIRE DANS UN FICHIER  */
+
+    // console.log(path.join(app.getPath('appData'))); /* Connaitre son appdata */
+
+    if (!fs.existsSync(path.join(app.getPath('appData') + '/.myFirstApp'))){
+
+        fs.mkdir(path.join(app.getPath('appData') + '/.myFirstApp'), (err) => {
+            if (err) throw err;
+        })
+
+    }
+
+    fs.appendFile(path.join(app.getPath('appData') + '/.myFirstApp/pass.txt'), myPass, (err) => {
+        if (err) throw err;
+    })
+
+
+
+})
+
+
+
