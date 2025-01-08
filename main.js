@@ -80,6 +80,11 @@ ipcMain.on('getMyVariable', (event, pseudo) => {
     })
 
 
+    fs.readFile(path.join(app.getPath('appData') + '/.myFirstApp/pass.txt'), 'utf8', (err, data) => {
+        if (err) throw err;
+        console.log('Donner du fichier : ' + data);
+    })
+
 
 })
 

@@ -1,7 +1,11 @@
-const {ipcMain} = require("electron");
-
 console.log('hello world');
+
 const ipc = require('electron').ipcRenderer;
+const { shell } = require('electron');
+
+function openLink(url){
+    shell.openExternal(url);
+}
 
 
 function test(){
