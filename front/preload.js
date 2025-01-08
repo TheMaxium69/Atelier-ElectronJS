@@ -1,2 +1,2 @@
 
-console.log('hello world de preload');
+console.log('load preload');

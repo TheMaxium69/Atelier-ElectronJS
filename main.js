@@ -35,5 +35,5 @@ app.whenReady().then(() => {
 
     createWindow();
 
-    console.log('App is ready 2');
+    console.log('App is ready');
 })
