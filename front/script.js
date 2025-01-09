@@ -2,6 +2,25 @@ console.log('hello world');
 
 const ipc = require('electron').ipcRenderer;
 const { shell } = require('electron');
+const { exec } = require('child_process');
+
+
+function commandeTerminal(){
+
+    let cmd = 'ls -l';
+
+    exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+    });
+
+}
+
+
 
 function openLink(url){
     shell.openExternal(url);
